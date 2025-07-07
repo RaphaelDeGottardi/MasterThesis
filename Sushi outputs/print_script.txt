@@ -1,0 +1,65 @@
+#!/bin/bash
+#/srv/gstore/projects/p37785/EzPyzBin2CellApp_2025-06-29--17-56-50/scripts/Spatial_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2_VisiumHD_postX_lung_5k_102647.sh
+set -eux
+set -o pipefail
+umask 0002
+
+#### SET THE STAGE
+SCRATCH_DIR=/scratch/EzPyzBin2CellApp_2025-06-29--17-56-50_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2_temp$$
+GSTORE_DIR=/srv/gstore/projects
+INPUT_DATASET=/srv/gstore/projects/p37785/EzPyzBin2CellApp_2025-06-29--17-56-50/input_dataset.tsv
+LAST_JOB=TRUE
+echo "Job runs on `hostname`"
+echo "at $SCRATCH_DIR"
+mkdir $SCRATCH_DIR || exit 1
+cd $SCRATCH_DIR || exit 1
+
+
+
+#### NOW THE ACTUAL JOBS STARTS
+. '/usr/local/ngseq/miniforge3/etc/profile.d/conda.sh'
+conda activate tmp_bin2cell
+python3 << EOT
+from ezpyz_bin2cell.app import EzAppBin2cell
+param = {}
+param['cores'] = '8'
+param['ram'] = '30'
+param['scratch'] = '100'
+param['partition'] = 'employee'
+param['process_mode'] = 'SAMPLE'
+param['samples'] = 'Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2'
+param['mpp'] = '0.5'
+param['prob_thresh_HE'] = '0.01'
+param['prob_thresh_GEX'] = '0.05'
+param['roi_x'] = '-1'
+param['roi_y'] = '-1'
+param['max_bin_distance'] = '2'
+param['name'] = 'Bin2CellApp'
+param['mail'] = ''
+param['sushi_app'] = 'EzPyzBin2CellApp'
+param['dataRoot'] = '/srv/gstore/projects'
+param['resultDir'] = 'p37785/EzPyzBin2CellApp_2025-06-29--17-56-50'
+param['isLastJob'] = True
+output = {}
+output['Name'] = 'Bin2CellApp_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2'
+output['Bin2Cell [File]'] = 'p37785/EzPyzBin2CellApp_2025-06-29--17-56-50/Bin2CellApp_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2'
+output['Figures [Link]'] = 'p37785/EzPyzBin2CellApp_2025-06-29--17-56-50/Bin2CellApp_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2/figures'
+output['Anndata [Link]'] = 'p37785/EzPyzBin2CellApp_2025-06-29--17-56-50/Bin2CellApp_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2/cdata.h5ad'
+output['Stardist [Link]'] = 'p37785/EzPyzBin2CellApp_2025-06-29--17-56-50/Bin2CellApp_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2/stardist'
+input = {}
+input['Name'] = 'Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2'
+input['BinnedOutputs2um'] = 'p37785/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2/binned_outputs/square_002um/'
+input['SourceImage'] = 'p37785/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2_tissue_image.btf'
+input['SpaceRanger'] = 'p37785/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2/spatial/'
+input['Report'] = 'p37785/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2_web_summary.html'
+input['Anndata'] = 'p37785/Visium_HD_Human_Lung_Cancer_post_Xenium_Prime_5K_Experiment2/binned_outputs/square_008um/filtered_feature_bc_matrix.h5'
+app = EzAppBin2cell()
+print(app.run(input, output, param))
+EOT
+
+
+#### JOB IS DONE WE PUT THINGS IN PLACE AND CLEAN AUP
+g-req -w copy Bin2CellApp_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2 /srv/gstore/projects/p37785/EzPyzBin2CellApp_2025-06-29--17-56-50
+cd /scratch
+rm -rf /scratch/EzPyzBin2CellApp_2025-06-29--17-56-50_Visium_HD_Human_Lung_Cancer_post_Xenium_5K_Experiment2_temp$$ || exit 1
+
