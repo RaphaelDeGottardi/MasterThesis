@@ -2,3 +2,4 @@ Benchmarking pipeline/CellTypeAssignment metrics/Classical Annotation/adata_with
 Benchmarking pipeline/CellTypeAssignment metrics/Celltypist/Celltypist_confidence_scores.csv
 Benchmarking pipeline/CellTypeAssignment metrics/Classical Annotation/figures/*
 Benchmarking pipeline/CellTypeAssignment metrics/Classical Annotation/figures/filter_genes_dispersion_qc_hvg.png
+Benchmarking pipeline/CellTypeAssignment metrics/Classical Annotation/adata_with_labels_sc.h5ad
