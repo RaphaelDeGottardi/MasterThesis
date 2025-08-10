@@ -1,5 +1,0 @@
-tmp_panhumanpy2
-tmp_celltypist
-tmp_enact_analysis
-tmp_xenium_publication-env
-tmp_tmp_convert_visium_xenium
