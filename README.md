@@ -1,6 +1,6 @@
-# 🧬 Master Thesis: Bin2Cell Methods for Spatial Transcriptomics
+# 🧬 Master Thesis: Benchmarking Cell Segmentation Approaches for High Resolution Spatial Transcriptomics
 
-> **Evaluation of Bin2Cell methods for Spatial Transcriptomics**
+> **Benchmarking Cell Segmentation Approaches for High Resolution Spatial Transcriptomics**
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-orange.svg)](https://jupyter.org)
@@ -10,7 +10,17 @@
 
 ## 📖 Overview
 
-This repository contains comprehensive analysis tools and benchmarking pipelines for evaluating bin-to-cell assignment methods in spatial transcriptomics. All code is implemented in Python using Jupyter notebooks, providing reproducible research workflows for extending and validating thesis results.
+This repository contains comprehensive analysis tools and benchmarking pipelines for evaluating cell segmentation approaches for high resolution spatial transcriptomics. All code is implemented in Python using Jupyter notebooks, providing reproducible research workflows for extending and validating thesis results.
+
+---
+
+## 📄 Thesis Document
+
+The complete thesis document is available in this repository as a PDF file.
+
+**[📖 View Thesis PDF](./Benchmarking_Cell_Segmentation_Approaches_for_High_Resolution_Spatial_Transcriptomics.pdf)**
+
+The thesis provides detailed methodology, results, and discussion of the benchmarking approaches implemented in this codebase.
 
 ---
 
